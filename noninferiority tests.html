@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John Willoughby">
+<meta name="dcterms.date" content="2025-01-07">
+
+<title>Testing for the non-inferiority of a restored area to a reference area</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="noninferiority tests_files/libs/clipboard/clipboard.min.js"></script>
+<script src="noninferiority tests_files/libs/quarto-html/quarto.js"></script>
+<script src="noninferiority tests_files/libs/quarto-html/popper.min.js"></script>
+<script src="noninferiority tests_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="noninferiority tests_files/libs/quarto-html/anchor.min.js"></script>
+<link href="noninferiority tests_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="noninferiority tests_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="noninferiority tests_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="noninferiority tests_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="noninferiority tests_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Testing for the non-inferiority of a restored area to a reference area</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Willoughby </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 7, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A common monitoring problem relates to mitigation following some disturbance. For example, a natural gas company disturbs a long, linear swath of land in order to build a pipeline and is then charged with restoring the disturbed area following completion of the pipeline construction. Or an oil extraction company must mitigate for the disturbance associated with drilling by restoring natural vegetation on well pads once extraction is complete. In both cases, the company involved would likely apply seeds or other plant materials to the disturbed sites in order to restore them. Either the company or regulating agency would then perform monitoring to assure the company has achieved success as defined by the regulating agency.</p>
+<p>The excellent book by Bryan <span class="citation" data-cites="manlyStatisticsEnvironmentalScience2008">Manly (<a href="#ref-manlyStatisticsEnvironmentalScience2008" role="doc-biblioref">2008</a>)</span> devotes a chapter to this issue. He refers to the types of tests that will be discussed here as tests of bioequivalence. These tests are common in the pharmaceutical industry where they are used to assess whether a new drug is as good (bioequivalent) to an existing but possibly more expensive or dangerous drug.</p>
+<p>“Bioequivalence” in comparing drugs often involves a two-sided test. You want the new drug to be almost as good or slightly better than the existing drug, and you set a lower and upper threshold within which the effects of the new drug must fall. In a restoration context the test will always be one-sided. You want the restored area to be almost as good as a reference area but you don’t care if it’s better (and, in most real-life situations, it will never be better, at least in time frames meaningful to management). Such a one-sided bioequivalence test is often referred to as a non-inferiority test, and that is the term we will use to describe it here.</p>
+</section>
+<section id="why-a-traditional-statistical-test-doesnt-work-well-in-this-situation" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-traditional-statistical-test-doesnt-work-well-in-this-situation">Why a traditional statistical test doesn’t work well in this situation</h2>
+<p>The null and alternative hypotheses are typically set up as follows for a normal two-sided statistical test (e.g., a t test):</p>
+<p><span class="math inline">\({H_0}:{\rm{ The\: means\: of\: the\: two \:populations \:are \:the \:same\: (treatment \:mean = reference \:mean)}}\)</span></p>
+<p><span class="math inline">\({H_A}:{\rm{ The\: means\: of\: the\: two \:populations \:are \:different \: (treatment \:mean &lt;&gt; reference \:mean)}}\)</span></p>
+<p>As Manly points out there are two problems with setting up the hypotheses in this way for a situation where the objective is to determine if a site has achieved a sufficient level of restoration as specified by a regulatory agency. The first is that the null hypothesis in hypothesis testing is really a straw man. No two sites would ever be exactly the same even in the absence of any disturbance, despite substantial effort to ensure the sites are paired in terms of slope, aspect, soil type, vegetation, etc. Because of this, a monitoring design with high power to detect change could reject the null hypothesis that the two populations are the same, leading to the conclusion that the company has failed to achieve the restoration objective, despite the fact that the treated area is, for all practical purposes, restored.</p>
+<p>The second problem with the traditional null and alternative hypotheses is more common. A monitoring design with low power to detect change would likely fail to reject the null hypothesis, with the result that the company can claim reclamation success even in situations where it is obvious to an observer that success has not in fact been achieved.</p>
+</section>
+<section id="shifting-the-burden-of-proof" class="level2">
+<h2 class="anchored" data-anchor-id="shifting-the-burden-of-proof">Shifting the burden of proof</h2>
+<p>A non-inferiority or bioequivalence test solves both of the problems associated with the traditional two-sided test. Most important is that such a test shifts the burden of proof. Now, instead of having to prove that the two sites are different (with a non-significant result leading to the conclusion that the two sites are the same), the company has to prove that the two sites are the “same” (with “same” here being defined in terms of the treatment site being within some specified distance from the reference site in whatever attribute is being measured). Although, for reasons discussed below, we won’t be using a two-sided bioequivalence test in assessing restoration success, looking at the change in the null and alternative hypotheses in a two-sided bioequivalence test allows for a meaningful comparison with the traditional two-sided hypotheses above. For a bioequivalence test the hypotheses are now:</p>
+<p><span class="math inline">\({H_0}:{\rm{ The\: means\: of\: the\: two \:populations \:are \:different\: (treatment \:mean &lt;&gt; reference \:mean),}}\)</span></p>
+<p><span class="math inline">\({H_A}:{\rm{ The\: means\: of\: the\: two \:populations \:are \:the \:same\: (treatment \:mean = reference \:mean)}}\)</span></p>
+<p>“Same” as used for <span class="math inline">\({H_A}\)</span> is defined as the treatment mean being within some specified distance from the reference mean. Like before, a low-powered monitoring design will likely fail to reject the null hypothesis, but now the failure to reject means the company must conclude that success has <em>not</em> been achieved.</p>
+<p>The bioequivalence test corresponding to the null and alternative hypotheses above is a two-sided test. A non-inferiority test is a one-sided test, which starts with the following two hypotheses:</p>
+<p><span class="math inline">\({H_0}:{\rm{ The\: treatment \:mean\ \le reference \:mean),}}\)</span></p>
+<p><span class="math inline">\({H_A}:{\rm{ The\:treatment \:mean &gt; reference \:mean)}}\)</span></p>
+<p>In a restoration context (or in any non-inferiority test) it is unreasonable to use the two hypotheses immediately above, because it is highly unlikely the treatment mean would ever be greater than the reference mean and, even if it were, unless it was quite a bit greater the test would be unable to detect the difference within reasonable levels of sampling. It thus becomes necessary to set some threshold beyond which the mean of the treatment population will be considered to be equivalent to the mean of the reference population. So, for example, we might say that success will be declared if the mean of the treatment area is at least 80 percent (or 0.8) of the mean of the reference population. The null and alternative hypotheses then become:</p>
+<p><span class="math inline">\({H_0}:{\rm{ The\: treatment \:mean\ \le 0.8(reference \:mean)}}\)</span></p>
+<p><span class="math inline">\({H_A}:{\rm{ The\:treatment \:mean &gt; 0.8(reference \:mean)}}\)</span></p>
+<p>When the non-inferiority test is conducted, a calculated p value &lt; the threshold p value (alpha) from a sampling objective results in rejection of <span class="math inline">\({H_0}\)</span> in favor of <span class="math inline">\({H_A}\)</span>, meaning that we conclude that the restoration has been successful. A calculated p value &gt; the threshold p value results in a failure to reject <span class="math inline">\({H_0}\)</span> and the conclusion that restoration has not been successful. Note that comparing a treatment mean to a reference mean must involve sampling of both the treatment mean and reference mean in the same year. It may be tempting to think that sampling of the reference area needs to occur only once and that all subsequent sampling need only occur on the treatment area until the time a statistical test results in rejection of the null hypothesis. This, however, ignores the temporal variability inherent in all natural systems. Suppose one is comparing the density of particular plants between the treatment and reference areas. Density can be greatly affected by yearly weather variability, particularly if one does not distinguish between seedlings and adult plants (or if total density includes annual plants). If sampling in the reference area occurred in a higher than normal rainfall year and a threshold mean density were based on the result of this sampling (e.g., the treatment area would have to have 0.8 of the mean density of the reference area) then subsequent sampling of the treatment area alone in poorer rainfall years might result in a failure to declare success even when it might have occurred (i.e., if one had actually sampled the reference area one would have found that the mean density in the reference area was far less than the mean in the better rainfall year and much closer to the treatment mean). The reverse could happen if the reference area were sampled in a poor rainfall year. The bottom line is that both the treatment area and the reference area must be sampled in each year that sampling occurs.<br>
+</p>
+<p>Note the nature of the null and alternative hypotheses for the non-inferiority test. Failure to reject the null hypothesis means that the treatment mean is less than or equal to some proportion of the reference mean. Thus, it is important to set as a success criterion that the mean of the treatment area be <em>greater</em> than the mean of the reference area. Alternatively, if the threshold for success is set to be at least 80% of the mean of the reference area, then the null and alternative hypotheses should use 79%, i.e., <span class="math inline">\({H_0}\)</span> is that the treatment mean ≤ 0.79(reference mean) and <span class="math inline">\({H_A}\)</span> is that the treatment mean &gt; 0.79(reference mean).</p>
+</section>
+<section id="dont-even-sample-until-the-possibility-exists-that-the-treatment-area-is-close-to-the-reference-area-in-whatever-attribute-is-being-measured" class="level2">
+<h2 class="anchored" data-anchor-id="dont-even-sample-until-the-possibility-exists-that-the-treatment-area-is-close-to-the-reference-area-in-whatever-attribute-is-being-measured">Don’t even sample until the possibility exists that the treatment area is close to the reference area in whatever attribute is being measured</h2>
+<p>Whenever a quantitative threshold of success is set there seems to be a tendency for regulatory agencies and/or industry consultants to think that quantitative monitoring must begin immediately. But in a restoration context, at least in the western United States, it is impossible for a treatment area to reach the threshold of success for the first few years after seeding/planting. Therefore, it is a waste of time and money to begin sampling to determine if the threshold has been met. Simple observations and photographs should suffice until it appears likely, or at least possible, the treatment area is above the threshold. It may be appropriate to direct quantitative monitoring at other aspects of the restoration project. For example, it is important to determine the success of the seeding or other planting in terms of numbers of germinating and establishing plants. One may wish, therefore, to count or otherwise assess the number of seeded/planted plants growing in the treatment area either through sampling or—where possible—through a complete census. This type of monitoring, though important, is not the type of monitoring that is the topic of this discussion.</p>
+<p>It may be desirable to set more than one success threshold at different times during the restoration process. Thus, you might decide to set the threshold at, say, 50% after some number of years and then move the threshold up to some higher number, say 75%, after some number of subsequent years.</p>
+</section>
+<section id="dont-set-the-success-criterion-too-high" class="level2">
+<h2 class="anchored" data-anchor-id="dont-set-the-success-criterion-too-high">Don’t set the success criterion too high</h2>
+<p>Because the restoration is important to you, it may be tempting to set the final success criteria high. For example you may be tempted to set the threshold at 90%, 95%, or even 100% of the mean of the reference area. Recognize that because the null hypothesis must be rejected to claim success, the treatment area sample mean will always have to be somewhat higher than the threshold in order for this rejection to occur. If the success threshold is set at 80%, the treatment sample mean will often have to be 85% or even 90% or more of the reference mean in order for the null hypothesis to be rejected at reasonable levels of sampling. Thus, setting the threshold higher than 80% is probably too rigorous and unreasonable in the real world. Even 80% may be too high in many situations. Think about the actual level of restoration that is reasonable to expect over the time frame involved for the vegetation type and climate you are dealing with. Realize, too, that as long as you are using a non-inferiority test, the true population mean of the treatment area is likely to be higher than the selected threshold when the non-inferiority test yields a significant result.</p>
+</section>
+<section id="paired-versus-unpaired-non-inferiority-tests" class="level2">
+<h2 class="anchored" data-anchor-id="paired-versus-unpaired-non-inferiority-tests">Paired versus unpaired non-inferiority tests</h2>
+<p>Certain restoration projects call for a monitoring design involving paired sampling units and a paired non-inferiority test, while others require independent sampling units and an unpaired non-inferiority test. The pipeline example mentioned in the first paragraph is an example of a restoration project that would greatly benefit from a paired design. Because such linear projects typically cross many different vegetation types, elevations, and rainfall zones, it would be very inefficient to take independent samples from treatment and reference areas. Instead, a plot at one point in the treated area corridor should be paired with another plot in the reference area immediately adjacent to it, and this process should continue along the pipeline corridor until a sample of paired plots is taken. The data are then analyzed using a paired non-inferiority test.</p>
+<p>Other restoration projects may not lead to the type of natural pairing provided by a linear project like a pipeline. The well pad example discussed above may be an example of this. Well pads are typically square or circular in area and while it might be possible to pair plots near the outside of the well pad with plots in the surrounding reference area near to each of the outer well pad plots, plots falling in the interior of the well pad may be too far away from the surrounding reference area to be successfully paired with reference plots. There may also be issues with the adjacent reference area. It may be, because of different vegetation types or levels of disturbance, that the only logical reference area to use is adjacent to the treated area on one side only. Or it may also be the case that the vegetation, soil type, aspect, etc., in the reference area is relatively homogeneous and similar to the vegetation that used to be in the treated area which was also homogeneous, so pairing is considered unnecessary. Whatever the reason, if sampling units between the treated and reference areas are unpaired, the two samples are independent and an unpaired non-inferiority test should be used.</p>
+<p>Despite the availability of an unpaired non-inferiority test, in a restoration context it will almost always be advantageous to use a paired sampling design if one can be justified. One option is to take a random sample of plots in the treatment area and then pair each treatment plot with a plot in the reference area based on soil, aspect, slope, etc. The pairing does not have to be perfect, though the less perfect it is the less the positive correlation between pairs of sampling units and the less advantageous the paired design. From a statistical testing perspective you can always use a paired test even on data that are really not paired, though the paired test in this situation will be less powerful than an unpaired test because of a loss of degrees of freedom. The reverse, however, is not true. You cannot use an unpaired test on data that are paired—the results of such a test will not be valid.</p>
+</section>
+<section id="non-inferiority-tests-on-continuous-and-binomial-data." class="level1">
+<h1>Non-inferiority tests on continuous and binomial data.</h1>
+<p>“Continuous data” as used here refers to both integers (whole numbers) or real numbers (numbers that can have decimals) to distinguish between this type of data and binomial data, which consist only of 0’s and 1’s. Continuous data as defined here consists of counts of a particular species or attribute or measurements such as estimates of cover, heights, or biomass. The use of quadrats to estimate the frequency of occurrence of a particular species is an example of binomial data. The frequency of the species is estimated by dividing the number of quadrats containing the species by the total number of quadrats sampled. Another example is the use of point intercept sampling to estimate the cover of a particular plant or attribute. Cover is estimated by dividing the number of points that hit the plant/attribute of interest by the total number of sampled points.</p>
+<p>In the examples below a t test is used to determine the non-inferiority of the means of samples consisting of continuous data as well as the non-inferiority of two proportions derived from binomial data. Although a chi-square test is often used to analyze binomial data, <span class="citation" data-cites="dagostinoAppropriatenessCommonProcedures1988">D’Agostino, Chase, and Belanger (<a href="#ref-dagostinoAppropriatenessCommonProcedures1988" role="doc-biblioref">1988</a>)</span> show that a t test on the two binomial samples works equally well. The t.test() function has the advantage of allowing the user to specify a true mean difference (mu) other than 0, which is helpful for our purposes here.</p>
+<p>Both paired and unpaired t tests are demonstrated for analyzing continuous data, but only an independent-sample (unpaired) test is provided for binomial data. This is because it is unlikely that binomial samples would be paired. It is impractical to try to pair point intercepts, and the large sample sizes required for binomial data (at least 100 and often many more than this) make it unlikely that frequency quadrats would be paired.</p>
+<p>If point intercepts or frequency quadrats are arrayed along transects and the transects (rather than the points or quadrats) are treated as the sampling units, then it may make sense to pair the transects. In this case, however, the data are no longer binomial and the difference in transect values between the treatment and reference areas can be analyzed using the paired t test for continuous data.</p>
+<section id="unpaired-independent-continuous-data." class="level2">
+<h2 class="anchored" data-anchor-id="unpaired-independent-continuous-data.">Unpaired (independent) continuous data.</h2>
+<p>Load needed packages</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># loads ggplot, dplyr, and several other tidy packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># to use theme_few in ggplot</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># to tell R where to find data files in project folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To run the code, download the zip file containing the necessary files into a directory you’ve created on your computer, and then in RStudio select File/Open Project, navigate to the folder into which you’ve unzipped the project files, and click on non-inferiority-tests.Rproj. Be sure to retain the directory structure. The quarto file (noninferiority tests.qmd) and the references.bib file should be in the same directory as non-inferiority-tests.Rproj, and the four data (*.csv) files should be in subdirectory /data.</p>
+<p>Data were derived through independent random samples of the treatment and control areas.</p>
+<p>Load the example data set. These are independent samples of counts of a particular plant species in both the treatment and reference areas. Note the data are in long format with the number of plants for each quadrat in the variable “Count” and the variable “Area” specifying whether the quadrat comes from either the Treatment or Reference area.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/unpaired restoration data.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Quadrat Area      Count
+    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+1       1 Reference     2
+2       2 Reference     0
+3       3 Reference     3
+4       4 Reference     6
+5       5 Reference     0
+6       6 Reference     1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Quadrat Area      Count
+    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+1      35 Treatment     8
+2      36 Treatment     2
+3      37 Treatment     2
+4      38 Treatment     4
+5      39 Treatment     2
+6      40 Treatment     5</code></pre>
+</div>
+</div>
+<p>Enter the required similarity of treatment area to the reference area as a proportion (e.g., if the treatment area is required to be 75% similar you assign 0.75 to prop_sim, below).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prop_sim <span class="ot">&lt;-</span> <span class="fl">0.75</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Set the threshold in absolute units for the lowest difference for which the confidence interval for the treated area must be above in order to declare significance. This is calculated by multiplying 1-prop.sim by the mean of the reference area and making this value negative. Thus, the confidence interval around the mean difference must be greater than the threshold at the given confidence level in order for the treatment area to be considered noninferior.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull out reference data only in order to calculate the threshold value (which requires taking the mean of the reference quadrat counts).</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ref_data <span class="ot">&lt;-</span> my_data <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Area <span class="sc">==</span> <span class="st">"Reference"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now calculate the threshold value and make it negative.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="sc">-</span>(<span class="dv">1</span> <span class="sc">-</span> prop_sim) <span class="sc">*</span> <span class="fu">mean</span>(ref_data<span class="sc">$</span>Count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Enter the alpha value for the desired confidence interval, e.g.&nbsp;for a 90% confidence interval enter alpha = 0.10. This is also the threshold p (alpha) value for concluding the treatment area is non-inferior to the reference area. For example, if alpha = 0.10, then a calculated p value &lt; 0.10 would be evidence for accepting the alternative hypothesis that the treatment area is non-inferior to the reference area.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Run a t-test to determine if the treatment is noninferior to the reference area. A p value less than the threshold p value (alpha) is evidence to accept the alternative hypothesis that the treatment area is not inferior to the reference area. Equivalently, if the lower bound of the (1-alpha) confidence interval is larger than the threshold, there is evidence to reject the null hypothesis that the treatment area is inferior to the reference area and accept the alternative hypothesis that the treatment area is not inferior to the reference area.</p>
+<p>It’s important to note that the “Area” variable given to the t.test() function below must have the estimate the mean of the Treatment quadrats <em>before</em> the mean of the Reference quadrats. If we don’t tell R the proper order (Treatment, then Reference), we’ll get an incorrect result because R will see that Reference comes before Treatment alphabetically. We tell R to put Treatment first by making Area a factor and using the “levels =” argument to tell R the order to use.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_data<span class="sc">$</span>Area <span class="ot">=</span> <span class="fu">factor</span>(my_data<span class="sc">$</span>Area, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Reference"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now when we run t.test(), R puts the areas in the proper order and we get the correct result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Count <span class="sc">~</span> Area, <span class="at">data =</span> my_data, <span class="at">mu =</span> threshold, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">conf.level =</span> (<span class="dv">1</span> <span class="sc">-</span> alpha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Count by Area
+t = 1.6175, df = 77.659, p-value = 0.05491
+alternative hypothesis: true difference in means between group Treatment and group Reference is greater than -0.825
+90 percent confidence interval:
+ -0.6843787        Inf
+sample estimates:
+mean in group Treatment mean in group Reference 
+                  3.175                   3.300 </code></pre>
+</div>
+</div>
+<p>The t test (a non-inferiority test in the way we’ve set it up) yields a p value of 0.055, which is less than our desired alpha value of 0.1. We therefore reject the null hypothesis in favor of the alternative hypothesis that the treatment area mean is greater than 0.75 of the reference area mean.</p>
+</section>
+</section>
+<section id="graph-the-results" class="level1">
+<h1>Graph the results</h1>
+<p>Note that the graph shows one-tailed confidence intervals for three confidence levels, 0.80, 0.90, and 0.95. This is for heuristic purposes only. The alpha level for significance should be chosen before the sampling is done.</p>
+<p>Convert to wide format and summarize the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_data_wide <span class="ot">&lt;-</span> my_data <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> Area,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> Count)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>my_data_summ <span class="ot">&lt;-</span> my_data_wide <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_trt  =</span> <span class="fu">mean</span>(Treatment),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_ref  =</span> <span class="fu">mean</span>(Reference),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_diff =</span> mean_trt <span class="sc">-</span> mean_ref,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_trt    =</span> <span class="fu">sd</span>(Treatment),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_ref    =</span> <span class="fu">sd</span>(Reference),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_trt     =</span> <span class="fu">length</span>(Treatment),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_ref     =</span> <span class="fu">length</span>(Reference),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_diff   =</span> <span class="fu">sqrt</span>((sd_trt<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_trt) <span class="sc">+</span> sd_ref<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_ref),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL80     =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.2</span>, </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL90     =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.1</span>, </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL95     =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.05</span>, </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)))</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all but mean_diff and LCL80, LCL90, and LCL95</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>my_data_summ2 <span class="ot">&lt;-</span> my_data_summ <span class="sc">|&gt;</span> </span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mean_diff, LCL80, LCL90, LCL95)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format for plotting</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>my_data_summ2_long <span class="ot">&lt;-</span> my_data_summ2 <span class="sc">|&gt;</span> </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"LCL"</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"CI"</span>,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lowerCI"</span>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(my_data_summ2_long, <span class="fu">aes</span>(<span class="at">x =</span> CI, <span class="at">y =</span> mean_diff)) <span class="sc">+</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lowerCI, <span class="at">ymax =</span> mean_diff, <span class="at">width =</span> .<span class="dv">05</span>)) <span class="sc">+</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> threshold, <span class="at">lty =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean Difference"</span>) <span class="sc">+</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Confidence Level"</span>) <span class="sc">+</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"80%"</span>, <span class="st">"90%"</span>, <span class="st">"95%"</span>)) <span class="sc">+</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Difference in the mean number of plants between treatment and </span><span class="sc">\n</span><span class="st">reference areas (treatment - reference)"</span>,</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Error bars show one-sided confidence intervals for confidence levels of 80%, 90%, and 95%.</span><span class="sc">\n</span><span class="st">If the threshold shown by the red dashed line is below the confidence interval, the treatment </span><span class="sc">\n</span><span class="st">area can be considered to be noninferior to the reference area at the given level of confidence."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="noninferiority-tests_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="816"></p>
+</div>
+</div>
+<p>The one-sided confidence intervals for 80% and 90% confidence levels are both above the threshold difference value, so if we had chosen (before sampling) either an alpha of 0.2 or an alpha of 0.1, we would conclude we had met the standard for non-inferiority. Had we, on the other hand, chosen an alpha of 0.05, we would conclude we have not met that standard because the threshold difference is included inside the confidence interval. Note the relationship between the 95% confidence interval here and the calculated p value from the t test above. Because the calculated p value is 0.055, it makes sense that the 95% confidence interval would include the threshold.</p>
+<section id="paired-correlated-data." class="level2">
+<h2 class="anchored" data-anchor-id="paired-correlated-data.">Paired (correlated) data.</h2>
+<p>Data are derived through paired random samples of the treatment and reference areas. Pairing can be accomplished in one of two ways. For linear construction projects such as pipelines and transmission corridors, a natural pairing is to locate a treatment plot in the area to be restored and a reference plot in similar undisturbed habitat as close to the treatment plot as possible. The sample then consists of all of the treatment/reference plots sampled along the linear project. For construction projects that are non-linear, a random sample of plots in the treatment area can be located and then matched with the same number of plots in the reference area on the basis of slope, aspect, soil type, etc. The second type of matching is likely to result in a lower degree of positive correlation than the first type, which makes use of a natural pairing. But any positive correlation will help improve the power of the test over no pairing at all (i.e., the independent samples discussed at the beginning of this document).</p>
+<p>Two examples are included below. The first is the same example given on page 169 of <span class="citation" data-cites="manlyStatisticsEnvironmentalScience2008">Manly (<a href="#ref-manlyStatisticsEnvironmentalScience2008" role="doc-biblioref">2008</a>)</span>, which he got from <span class="citation" data-cites="mcdonaldTestingBioequivalenceField1994">McDonald and Erickson (<a href="#ref-mcdonaldTestingBioequivalenceField1994" role="doc-biblioref">1994</a>)</span>. The data consist of a sample of 8 paired plots in which shrub density was measured. The data consist of decimal numbers ranging from 0.67 to 1.02. It’s not clear what these values are supposed to represent. Perhaps these represent the number of shrubs per square meter, which would be derived by dividing the number of shrubs counted in each plot by the size of the plot in square meters.</p>
+<p>The second example consists of the cover of perennial grass in a sample of 40 paired quadrats.</p>
+</section>
+</section>
+<section id="example-1-from-manly-2008" class="level1">
+<h1>Example 1 (from Manly 2008)</h1>
+<p>Load the data set. Note that data are in wide format, with separate columns for the “Reference” and “Treatment” variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>paired_data1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/Manly paired restoration data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 8 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (2): Reference, Treatment
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Specify the required similarity of the treatment area to the reference area in prop_._sim2 below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>prop_sim2 <span class="ot">&lt;-</span> <span class="fl">0.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The similarity proportion entered into prop.sim2 above is used to calculate Z scores for each pair of plots. The Z score for each pair is calculated as follows:</p>
+<p><span class="math display">\[
+\begin{array}{l}Z = valu{e_{trt}} - (prop.sim2*valu{e_{ref}})\\{\rm{where:}}\\valu{e_{trt}} = {\rm{value \:of\: treatment\: plot}}\\valu{e_{ref}} = {\rm{value\: of \:reference\: plot}}\\prop.sim2 = {\rm{the \:proportion \:similarity \:entered \:in\: prop}}{\rm{.sim2}}\end{array}
+\]</span></p>
+<p>Note that the adjusted reference values (Z) are subtracted from the treatment values. The null hypothesis is therefore that the mean of the treatment values is less than or equal to the mean of the adjusted reference values, in which case we would conclude the treatment has not been shown to be non-inferior to the reference. If we reject this null hypothesis we then conclude the treatment has been shown to be non-inferior to the reference area.</p>
+<p>To determine this we conduct a one-tailed, one-sample t test to see whether the mean of Z is sufficiently larger than 0. Note that a one sample t test on the differences between pairs of plots is equivalent to a paired-sample t test on the pairs of plot values. Also note that we don’t specify a confidence level for the t.test() function, accepting the default argument of conf.level = 0.95. This assumes our desired alpha level for significance is 0.05.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object paired_data2 which adds the variable Z calculated from paired-data1.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>paired_data2 <span class="ot">&lt;-</span> paired_data1 <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Z =</span> Treatment <span class="sc">-</span> (prop_sim2 <span class="sc">*</span> Reference))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct the one-sample t test on the variable Z. The alternative = "greater" argument makes the test one-tailed. </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(paired_data2<span class="sc">$</span>Z, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  paired_data2$Z
+t = 2.2145, df = 7, p-value = 0.03119
+alternative hypothesis: true mean is greater than 0
+95 percent confidence interval:
+ 0.01841826        Inf
+sample estimates:
+mean of x 
+   0.1275 </code></pre>
+</div>
+</div>
+<p>In the example given by Manly (2008) the proportion of similarity used was 0.8. If we enter 0.8 under prop.sim2 above, the t test run above yields a t value of 2.2145 and a p value of 0.031, leading us to conclude the treatment area is non-inferior to the reference area at an alpha of 0.05.</p>
+<p>Graph of the results for the paired sample data from Manly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the data</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>paired_summ <span class="ot">&lt;-</span> paired_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_Z =</span> <span class="fu">mean</span>(Z),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_Z =</span> <span class="fu">length</span>(Z),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_Z =</span> <span class="fu">sd</span>(Z)<span class="sc">/</span><span class="fu">sqrt</span>(n_Z),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL80 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL90 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL95 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all but mean_Z and LCL80, LCL90, and LCL95</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>paired_summ2 <span class="ot">&lt;-</span> paired_summ <span class="sc">|&gt;</span> </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mean_Z, LCL80, LCL90, LCL95)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format for plotting</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>paired_summ2_long <span class="ot">&lt;-</span> paired_summ2 <span class="sc">|&gt;</span> </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"LCL"</span>),</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"CI_level"</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"CI_value"</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(paired_summ2_long, <span class="fu">aes</span>(<span class="at">x =</span> CI_level, <span class="at">y =</span> mean_Z)) <span class="sc">+</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_Z <span class="sc">-</span> CI_value, <span class="at">ymax =</span> mean_Z, <span class="at">width =</span> .<span class="dv">05</span>)) <span class="sc">+</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean Difference"</span>) <span class="sc">+</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Confidence Level"</span>) <span class="sc">+</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"80%"</span>, <span class="st">"90%"</span>, <span class="st">"95%"</span>)) <span class="sc">+</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Difference in the density of shrubs between treatment and </span><span class="sc">\n</span><span class="st">reference areas (treatment - reference)"</span>,</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Error bars show one-sided confidence intervals for confidence levels of 80%, 90%, and 95%.</span><span class="sc">\n</span><span class="st">If the threshold shown by the red dashed line is below the confidence interval, the treatment </span><span class="sc">\n</span><span class="st">area can be considered to be noninferior to the reference area at the given level of confidence."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="noninferiority-tests_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="816"></p>
+</div>
+</div>
+<p>None of the one-sided confidence intervals contain the threshold difference value of 0. This comports with the results of the paired-sample t test which yielded a p value of 0.031.</p>
+</section>
+<section id="example-2-cover-data" class="level1">
+<h1>Example 2 (cover data)</h1>
+<p>Example 2 consists of a sample of 40 paired quadrats, one of each pair placed in the treatment area and the second of each pair in the reference area as close as possible to the one in the treatment area. The cover of perennial grasses in the quadrats was visually estimated to the nearest percent and then expressed as a proportion. Data are in wide format with separate columns for the variables “treatment” and “reference”. A third column (“pair”) specifies the pair number.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>paired_cover <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/paired cover data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 40 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (3): pair, treatment, reference
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Create Z values as in paired Example 1 above, multiplying prop.sim2 by each of the reference values and then subtracting that value from each of the treatment values. Note we’re using the same prop.sim2 value (0.8) we used for paired Example 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>paired_cover2 <span class="ot">&lt;-</span> paired_cover <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Z =</span> treatment <span class="sc">-</span> (prop_sim2 <span class="sc">*</span> reference))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Perform a one-sample, one-tailed test on Z as in paired Example 1 above. Like the Manly example above, we don’t specify a confidence level for the t.test() function, accepting the default argument of conf.level = 0.95. This assumes our desired alpha level for significance is 0.05.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(paired_cover2<span class="sc">$</span>Z, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  paired_cover2$Z
+t = 2.3711, df = 39, p-value = 0.01138
+alternative hypothesis: true mean is greater than 0
+95 percent confidence interval:
+ 0.009796852         Inf
+sample estimates:
+mean of x 
+  0.03385 </code></pre>
+</div>
+</div>
+<p>The p value of 0.011 from the one-tailed paired t test leads us to conclude the treatment area is non-inferior to the reference area at an alpha 0f 0.05.</p>
+<p>Create a graph similar to that used in paired Example 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the data</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>paired_cover_summ <span class="ot">&lt;-</span> paired_cover2 <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_Z =</span> <span class="fu">mean</span>(Z),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_Z =</span> <span class="fu">length</span>(Z),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_Z =</span> <span class="fu">sd</span>(Z)<span class="sc">/</span><span class="fu">sqrt</span>(n_Z),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL80 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL90 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL95 =</span> se_Z <span class="sc">*</span>  <span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">df =</span> n_Z <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all but mean_Z and LCL80, LCL90, and LCL95</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>paired_cover_summ2 <span class="ot">&lt;-</span> paired_cover_summ <span class="sc">|&gt;</span> </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mean_Z, LCL80, LCL90, LCL95)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format for plotting</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>paired_cover_summ2_long <span class="ot">&lt;-</span> paired_cover_summ2 <span class="sc">|&gt;</span> </span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"LCL"</span>),</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"CI_level"</span>,</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"CI_value"</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(paired_cover_summ2_long, <span class="fu">aes</span>(<span class="at">x =</span> CI_level, <span class="at">y =</span> mean_Z)) <span class="sc">+</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_Z <span class="sc">-</span> CI_value, <span class="at">ymax =</span> mean_Z, <span class="at">width =</span> .<span class="dv">05</span>)) <span class="sc">+</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean Difference in Cover"</span>) <span class="sc">+</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Confidence Level"</span>) <span class="sc">+</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"80%"</span>, <span class="st">"90%"</span>, <span class="st">"95%"</span>)) <span class="sc">+</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Difference in the mean cover of perennial grasses between treatment and </span><span class="sc">\n</span><span class="st">reference areas (treatment - reference)"</span>,</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Error bars show one-sided confidence intervals for confidence levels of 80%, 90%, and 95%.</span><span class="sc">\n</span><span class="st">If the threshold shown by the red dashed line is below the confidence interval, the treatment </span><span class="sc">\n</span><span class="st">area can be considered to be noninferior to the reference area at the given level of confidence."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="noninferiority-tests_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="816"></p>
+</div>
+</div>
+<p>None of the one-sided confidence intervals include the threshold difference value of 0. This is to be expected since the paired-sample t test gave a p value of 0.011.</p>
+</section>
+<section id="binomial-data" class="level1">
+<h1>Binomial data</h1>
+<p>The following test applies to data consisting only of 0’s and 1’s. This could be frequency data collected in quadrats where each quadrat either contains one or more plants of the target species (1) or does not contain the species (0). Or it could be point-intercept data where a given point either intercepts the target species (1) or doesn’t intercept the species (0). As explained above, a paired design is impractical for binomial data. It is therefore assumed here that the sampling units in the treatment and reference areas are unpaired (independent).</p>
+<p>Probably the easiest way of conducting this test is to simply use the same unpaired (independent-sample) t test as used above for continuous data. Although a chi-square test is often employed to test whether two binomial samples come from different populations, a t test on the two sets of data accomplishes the same thing. See <span class="citation" data-cites="dagostinoAppropriatenessCommonProcedures1988">D’Agostino, Chase, and Belanger (<a href="#ref-dagostinoAppropriatenessCommonProcedures1988" role="doc-biblioref">1988</a>)</span>, who recommend using either a Pearson chi-square test (without the Yates’ correction for continuity) <em>or</em> an independent-sample t test for testing the equality of two independent binomial populations. Through simulations I found that the t test works as well as the chi-square test in most situations (https://github.com/johnwillo/chi-square-vs-t-test). Since we’ve already developed the code above for a non-inferiority test for two independent samples, we’ll use the same code here.</p>
+<p>To use this test the data must be provided on a sampling-unit by sampling-unit basis and not in frequency table format. We perform the test on a data set consisting of 400 frequency quadrats, 200 in the treatment area and 200 in the reference area.</p>
+<p>Load the data which is in long format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>freq_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/IMPL_freq.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 400 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): area
+dbl (2): quad.num, status
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>As before, we need to specify how similar the treatment area must be to the reference area and the desired alpha level (alpha.bin). Then we need to set the threshold in absolute units.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>prop_sim3 <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter only the reference values from freq_data, which is in long format, in order to calculate the threshold value.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>freq_ref <span class="ot">&lt;-</span> freq_data <span class="sc">|&gt;</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(area <span class="sc">==</span> <span class="st">"Reference"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>threshold3 <span class="ot">&lt;-</span> <span class="sc">-</span>(<span class="dv">1</span> <span class="sc">-</span> prop_sim3) <span class="sc">*</span> <span class="fu">mean</span>(freq_ref<span class="sc">$</span>status)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>alpha.bin <span class="ot">&lt;-</span> <span class="fl">0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Change the variable area in freq_data to a factor with levels, Treatment and Reference (in that order).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>freq_data<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">factor</span>(freq_data<span class="sc">$</span>area, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Reference"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Conduct the t test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(status <span class="sc">~</span> area, <span class="at">data =</span> freq_data,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> threshold3, <span class="at">alternative =</span> <span class="st">"greater"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> (<span class="dv">1</span><span class="sc">-</span>alpha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  status by area
+t = 1.4423, df = 398, p-value = 0.075
+alternative hypothesis: true difference in means between group Treatment and group Reference is greater than -0.162
+90 percent confidence interval:
+ -0.1540808        Inf
+sample estimates:
+mean in group Treatment mean in group Reference 
+                   0.45                    0.54 </code></pre>
+</div>
+</div>
+<p>Convert to wide format and summarize the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>freq_data_wide <span class="ot">&lt;-</span> freq_data <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> area,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> status)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>freq_data_summ <span class="ot">&lt;-</span> freq_data_wide <span class="sc">|&gt;</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_trt =</span> <span class="fu">mean</span>(Treatment),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_ref =</span> <span class="fu">mean</span>(Reference),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_diff =</span> mean_trt <span class="sc">-</span> mean_ref,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_trt =</span> <span class="fu">sd</span>(Treatment),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_ref =</span> <span class="fu">sd</span>(Reference),</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_trt =</span> <span class="fu">length</span>(Treatment),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_ref =</span> <span class="fu">length</span>(Reference),</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_diff =</span> <span class="fu">sqrt</span>((sd_trt<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_trt) <span class="sc">+</span> sd_ref<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_ref),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL80 =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.2</span>, </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)),</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL90 =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.1</span>, </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)),</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">LCL95 =</span> mean_diff <span class="sc">-</span> (se_diff <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.05</span>, </span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">df =</span> n_trt <span class="sc">+</span> n_ref <span class="sc">-</span> <span class="dv">2</span>)))</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all but mean_diff and LCL80, LCL90, and LCL95</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>freq_data_summ2 <span class="ot">&lt;-</span> freq_data_summ <span class="sc">|&gt;</span> </span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mean_diff, LCL80, LCL90, LCL95)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format for plotting</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>freq_data_summ2_long <span class="ot">&lt;-</span> freq_data_summ2 <span class="sc">|&gt;</span> </span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"LCL"</span>),</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"CI"</span>,</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lowerCI"</span>)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(freq_data_summ2_long, <span class="fu">aes</span>(<span class="at">x =</span> CI, <span class="at">y =</span> mean_diff)) <span class="sc">+</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lowerCI, <span class="at">ymax =</span> mean_diff, <span class="at">width =</span> .<span class="dv">05</span>)) <span class="sc">+</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> threshold3, <span class="at">lty =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean Difference"</span>) <span class="sc">+</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Confidence Level"</span>) <span class="sc">+</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"80%"</span>, <span class="st">"90%"</span>, <span class="st">"95%"</span>)) <span class="sc">+</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Difference in the the proportion of quadrats containing plants between treatment and </span><span class="sc">\n</span><span class="st">reference areas (treatment - reference)"</span>,</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Error bars show one-sided confidence intervals for confidence levels of 80%, 90%, and 95%.</span><span class="sc">\n</span><span class="st">If the threshold shown by the red dashed line is below the confidence interval, the treatment </span><span class="sc">\n</span><span class="st">area can be considered to be noninferior to the reference area at the given level of confidence."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="noninferiority-tests_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="816"></p>
+</div>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-dagostinoAppropriatenessCommonProcedures1988" class="csl-entry" role="listitem">
+D’Agostino, Ralph B., Warren Chase, and Albert Belanger. 1988. <span>“The Appropriateness of Some Common Procedures for Testing the Equality of Two Independent Binomial Populations.”</span> <em>The American Statistician</em> 42 (3): 198–202. <a href="https://doi.org/10.1080/00031305.1988.10475563">https://doi.org/10.1080/00031305.1988.10475563</a>.
+</div>
+<div id="ref-manlyStatisticsEnvironmentalScience2008" class="csl-entry" role="listitem">
+Manly, Brian F. J. 2008. <em>Statistics for Environmental Science and Management</em>. 2nd ed. CRC Press.
+</div>
+<div id="ref-mcdonaldTestingBioequivalenceField1994" class="csl-entry" role="listitem">
+McDonald, Lyman L., and Wallace P. Erickson. 1994. <span>“Testing for Bioequivalence in Field Studies: Has a Disturbed Site Been Adequately Reclaimed?”</span> In <em>Statistics in Ecology and Environmental Monitoring</em>, edited by David J. Fletcher and Bryan F. J. Manly, 1st ed., 1:183–97. Otago Conference Serires No. 2. University of Otago Press.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

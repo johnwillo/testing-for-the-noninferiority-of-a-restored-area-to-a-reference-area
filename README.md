@@ -1,1 +1,2 @@
-# testing-for-the-noninferiority-of-a-restored-area-to-a-reference-area
+# Testing for the noninferiority of a restored site to a reference site.
+R code is provided in a quarto file to perform noninferiority tests to determine if an area that has been restored is noninferior to a reference area. Tests are provided both for continuous data (e.g., counts, plant heights, or ocular estimates of vegetation cover) and for binomial data (e.g., plant quadrat frequency or point intercept estimates of vegetation cover). Both unpaired and paired noninferiority tests are provided for continuous data and an unpaired test is provided for binomial data.
